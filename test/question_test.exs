@@ -30,9 +30,7 @@ defmodule QuestionTest do
   end
 
   def eventually_match(generators, answer) do
-    Stream.repeatedly(
-      fn -> build_question(generators: generators).substitutions end)
-    |> Enum.find(
-      &(Keyword.fetch!(&1, :left) == answer))
+    Stream.repeatedly(fn -> build_question(generators: generators).substitutions end)
+    |> Enum.find(&(Keyword.fetch!(&1, :left) == answer))
   end
 end

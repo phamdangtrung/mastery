@@ -65,7 +65,7 @@ defmodule QuizTest do
   end
 
   defp quiz(context) do
-    { :ok, Map.put(context, :quiz, build_quiz_with_two_templates()) }
+    {:ok, Map.put(context, :quiz, build_quiz_with_two_templates())}
   end
 
   defp quiz_always_adds_one_and_two(context) do
@@ -75,7 +75,7 @@ defmodule QuizTest do
       build_quiz(mastery: 2)
       |> Quiz.add_template(fields)
 
-    { :ok, Map.put(context, :quiz, quiz) }
+    {:ok, Map.put(context, :quiz, quiz)}
   end
 
   defp assert_more_questions(quiz) do

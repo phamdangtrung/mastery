@@ -2,14 +2,15 @@ defmodule Mastery.Core.Quiz do
   alias Mastery.Core.Response
   alias Mastery.Core.Question
   alias Mastery.Core.Template
-  defstruct title:            nil,
-            mastery:          3,
-            templates:        %{},
-            used:             [],
+
+  defstruct title: nil,
+            mastery: 3,
+            templates: %{},
+            used: [],
             current_question: nil,
-            last_respones:    nil,
-            record:           %{},
-            mastered:         []
+            last_respones: nil,
+            record: %{},
+            mastered: []
 
   def new(fields) do
     struct!(__MODULE__, fields)
@@ -29,6 +30,7 @@ defmodule Mastery.Core.Quiz do
   end
 
   def select_question(%__MODULE__{templates: t}) when map_size(t) == 0, do: nil
+
   def select_question(quiz) do
     quiz
     |> pick_current_question()
@@ -116,17 +118,18 @@ defmodule Mastery.Core.Quiz do
     template = template(quiz)
     list = Map.get(quiz, field)
 
-    Map.put(quiz, field, [template | list ])
+    Map.put(quiz, field, [template | list])
   end
 
   defp reset_template_cycle(%{templates: templates, used: used} = quiz)
-  when map_size(templates) == 0 do
+       when map_size(templates) == 0 do
     %__MODULE__{
-      quiz |
-      templates: Enum.group_by(used, fn(template) -> template.category end),
-      used: []
+      quiz
+      | templates: Enum.group_by(used, fn template -> template.category end),
+        used: []
     }
   end
+
   defp reset_template_cycle(quiz), do: quiz
 
   defp inc_record(%{current_question: question} = quiz) do
@@ -144,6 +147,7 @@ defmodule Mastery.Core.Quiz do
       Map.delete(quiz.record, question.template.name)
     )
   end
+
   defp reset_used(%{current_question: question} = quiz) do
     Map.put(
       quiz,

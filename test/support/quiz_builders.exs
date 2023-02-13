@@ -18,8 +18,7 @@ defmodule QuizBuilders do
         generators: addition_generators(single_digits()),
         checker: &addition_checker/2
       ],
-
-    overrides
+      overrides
     )
   end
 
