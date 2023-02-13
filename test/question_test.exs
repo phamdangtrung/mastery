@@ -33,6 +33,6 @@ defmodule QuestionTest do
     Stream.repeatedly(
       fn -> build_question(generators: generators).substitutions end)
     |> Enum.find(
-      &(Keyword.fetch!(&1, :left) |> IO.inspect() == answer))
+      &(Keyword.fetch!(&1, :left) == answer))
   end
 end
