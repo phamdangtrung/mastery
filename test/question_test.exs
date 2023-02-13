@@ -1,5 +1,4 @@
 defmodule QuestionTest do
-  alias ElixirLS.LanguageServer.Protocol.TextEdit
   use ExUnit.Case
   use QuizBuilders
 
