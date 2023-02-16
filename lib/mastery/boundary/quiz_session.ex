@@ -20,6 +20,7 @@ defmodule Mastery.Boundary.QuizSession do
   end
 
   defp maybe_finish(nil, _email), do: {:stop, :normal, :finished, nil}
+
   defp maybe_finish(quiz, email) do
     {
       :reply,

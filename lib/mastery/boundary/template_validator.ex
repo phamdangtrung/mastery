@@ -18,8 +18,8 @@ defmodule Mastery.Boundary.TemplateValidator do
   def validate_name(name) when is_atom(name), do: :ok
   def validate_name(_name), do: {:error, "must be an atom"}
 
-  def validate_instruction(instruction) when  is_binary(instruction), do: :ok
-  def validate_instruction(_instruction) , do: {:error, "must be a binary"}
+  def validate_instruction(instruction) when is_binary(instruction), do: :ok
+  def validate_instruction(_instruction), do: {:error, "must be a binary"}
 
   def validate_raw(raw) when is_binary(raw) do
     check(String.match?(raw, ~r{\S}), {:error, "can't be blank"})
@@ -32,14 +32,15 @@ defmodule Mastery.Boundary.TemplateValidator do
     |> Enum.map(&validate_generator/1)
     |> Enum.reject(&(&1 == :ok))
     |> case do
-      [ ] -> :ok
+      [] -> :ok
       errors -> {:errors, errors}
     end
   end
+
   def validate_generators(_generators), do: {:error, "must be a map"}
 
   def validate_generator({name, generator}) when is_atom(name) and is_list(generator) do
-    check(generator != [ ], {:error, "can't be empty"})
+    check(generator != [], {:error, "can't be empty"})
   end
 
   def validate_generator({name, generator}) when is_atom(name) and is_function(generator, 0) do

@@ -1,5 +1,6 @@
 defmodule Mastery.Examples.Math do
   alias Mastery.Core.Quiz
+
   def template_fields() do
     [
       name: :single_digit_addition,
